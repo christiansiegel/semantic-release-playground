@@ -1,0 +1,12 @@
+os: linux
+language: shell
+
+jobs:
+  include:
+    - name: build
+      language: shell
+      script:
+        - echo "This would be e.g. a docker build"
+        - echo $TRAVIS_BRANCH
+        - echo $TRAVIS_TAG
+        - echo $TRAVIS_PULL_REQUEST
