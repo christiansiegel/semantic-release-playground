@@ -10,3 +10,12 @@ jobs:
         - echo $TRAVIS_BRANCH
         - echo $TRAVIS_TAG
         - echo $TRAVIS_PULL_REQUEST
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script:
+          # Use nvm to install and use the Node LTS version (nvm is installed on all Travis images)
+          - nvm install lts/*
+          - npx semantic-release
+        on:
+          all_branches: true
