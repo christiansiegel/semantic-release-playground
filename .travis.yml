@@ -12,10 +12,9 @@ jobs:
       node_js: lts/*
       services:
         - docker
-      install:
-        - npm install -g semantic-release-docker
       script:
         - docker build -t $IMAGE_NAME .
+        - npm install -g semantic-release-docker
         - npx semantic-release
 
 stages:
