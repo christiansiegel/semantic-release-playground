@@ -2,6 +2,9 @@
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/github",
-    "@semantic-release/release-notes-generator"
+    "@semantic-release/release-notes-generator",
+    ["semantic-release-docker", {
+      "name": "christiansiegel/semantic-release-test"
+    }]
   ]
 }

@@ -5,11 +5,31 @@ jobs:
     - stage: test
       language: shell
       script: echo dummy test stage
-    - stage: semantic release
-      if: branch = master AND type NOT IN (pull_request)
-      env:
-      # GITHUB_TOKEN
-      - secure: "SHmDOuY6/nW8jtdfawTSXTZcrBQEpiaGE+tgyflA6zlZNhHIrqHo+qxRJJyAGRtBTTHAZhLnIFy+cIv/KI7R4be1XitdWcXvhd5ojcfl++o2oOB7waZiGmm67oWeVNnqg4LLhRTYa1A4dnVxkuJps0M8E3zXqrg+gy5a9wumi5fCINaqE+aog6/rRRwe7fBeqa2KFCQEhYiQmNGV0Y4dFea1ilz28Vbm7xlLcAuaKJilz4JeEORTabOmFyVIp6PQxcPhhtvR6A2Pn/GoAzkrK1ptPIeT4oVSGr622Nd1XeKejQdm0uOogDk0xwNi2TL72lYfzhZiESuTBVqdwidjWoJmsXw1CwNHDeH/+/OFjY5MzbuM0TMeMMdrHSkvIigtbh6SzXj97njWug+xgjzG9Z0/EKF4uuDqku4Kwd5v30pJL6psaEvKQfa70WNxz+9URnL1gG44nmt/wniGYzNOb62/c65gEKn89RTfYokY8lKUuQ+Wsu2g2f2fxQcq9ogW7seAjCJH9bfeHicK93huqZaw/4QXdYi81/gPRrkQDjMk8UEFJ09UywJq5L5XYKUOVoyp89xEqeTT8+fB5XRyGa8NB36ah8NKu6ErNbK9D1CgQ0m/RxUtwO0zktpLt3ZABSH28BC41N2JXgOJOLw6Bh2R6DEHWCAS1sGPBF56UT8="
+    - stage: release
       language: node_js
       node_js: lts/*
-      script: npx semantic-release
+      services:
+        - docker
+      install:
+        - npm install semantic-release-docker -D
+      script:
+        - docker build -t christiansiegel/semantic-release-test .
+        - npm run semantic-release
+
+stages:
+  - test
+  - name: release
+    if: branch = master AND type = push AND fork = false
+
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
+
+env:
+  global:
+  # GITHUB_TOKEN
+  - secure: "SHmDOuY6/nW8jtdfawTSXTZcrBQEpiaGE+tgyflA6zlZNhHIrqHo+qxRJJyAGRtBTTHAZhLnIFy+cIv/KI7R4be1XitdWcXvhd5ojcfl++o2oOB7waZiGmm67oWeVNnqg4LLhRTYa1A4dnVxkuJps0M8E3zXqrg+gy5a9wumi5fCINaqE+aog6/rRRwe7fBeqa2KFCQEhYiQmNGV0Y4dFea1ilz28Vbm7xlLcAuaKJilz4JeEORTabOmFyVIp6PQxcPhhtvR6A2Pn/GoAzkrK1ptPIeT4oVSGr622Nd1XeKejQdm0uOogDk0xwNi2TL72lYfzhZiESuTBVqdwidjWoJmsXw1CwNHDeH/+/OFjY5MzbuM0TMeMMdrHSkvIigtbh6SzXj97njWug+xgjzG9Z0/EKF4uuDqku4Kwd5v30pJL6psaEvKQfa70WNxz+9URnL1gG44nmt/wniGYzNOb62/c65gEKn89RTfYokY8lKUuQ+Wsu2g2f2fxQcq9ogW7seAjCJH9bfeHicK93huqZaw/4QXdYi81/gPRrkQDjMk8UEFJ09UywJq5L5XYKUOVoyp89xEqeTT8+fB5XRyGa8NB36ah8NKu6ErNbK9D1CgQ0m/RxUtwO0zktpLt3ZABSH28BC41N2JXgOJOLw6Bh2R6DEHWCAS1sGPBF56UT8="
+  # DOCKER_USERNAME
+  - secure: "pn22+kbVQTJAdlw5NB3LLDCONkTBZ+SL9vS0l4B0YnFqIv8iDi8uYby6dxNn+zQk6fYQjOutztgbtj4Hwwx8oQdXZnWDy5XY5/M5RW6rEB3br0hn0xcvW6agIHSahkXXxK7ytwP6gR7JPrBRBxnFqmxdmavT56facR+ig6tq3UCZN/00uSZOYh0DAbnrHDjhGipiLObiF7ow/zzBNORhPuMPrAfxPrGL1oibiDGO/IwEXvwassZrGeX9oIBorjSBg2EddaUkKwt5ZNMu8OKkw+WvvSzNDYgtZrrsqfFl3+EjvmXaP4kcQWRc6lnLItWOqfezEqpwQWaYt9Sh8efPxQi2rUOfYgzyc6RrUuhF/DSZeAPe7xHRnFEpBq9mCmWPfzzOUT9KK3+J3qhY+eAlXWTnwBE8jQZz7nA4s6sjazV4BV/ZVpQBfBOie2Q6bBVinT9ZE99m4IHh52awFcl62yfi4/+GWCURpE/lFXQDXH9Bz9OJ7yIkOdRnDI/cR79sSvYXaUfcybDaJx+MXPkr3IO0gjsCF3VsT/p80XNJkMV/hLOC1z3OMIBx0Z+fBOuY1EMOx8uoINKfKQS6NK+9cKNIC5zECuDjfANcIcOV8fDYwXvxqImIk7AMHrpjd2XHbP0T1Ai1juzdL0ArXpgD6ldFsOIDIGa5yiNdGHjKR6U="
+  # DOCKER_PASSWORD
+  - secure: "VlgfR4DFd5kShAEaZ8r+DAtjJiwlCUQwsDC4OiQaU5rGMJ2wF7dT/9OzSU5Ld2vpbPHSiSAAWd569jvjaqK1zNIVG+hR9/X9SihyTL04P0Cmw6lbv/LP+OWe5TiEY73IbeSvyy7qsXXwplviutI2Iv73sys5lw3+KWfg3ICghEw+8XNBZ42h+GrTEDiGg0K/CyUV2XZy+6fBDuYuHX8TFaQSBI5zCpbMQXzAFNkuFxgj+t4fXwyzrxvVVOSrkntCbO/arKPvPwK2oSc7jqqaRk4KYJgfynDz2XMnVcju1ftR5fvOiCHUrsyYt7UOHasDB43FTphKECOOEId3QxpoG09mC9BGIHxGX/G6vZr3p+zPWqGVplPIPx23rymJvPuTDUltb4NnBRXXVtAhD0JkgHEMIZoI6tb7Jn/P1/T5+7X4o8ODXXf/G776D4nmURqDHrpDwuHXdza5nWDgEFVM4BpcYcsvQGT+xPvisNEQZlwydF5obSW+a6fwZiXjQC5X8mZ+5gIop7xpoUwovYqwEWqjtPKrAGJQSjrG9BjQbu2fNUhSq/JxV8DJfMLvb2V0MQIcOAU3FvpsN8bJc2b8FjMZCw1FChOgT+sNiRHwmSIIOXWjQBDKcgO5JFOcM91s/zlwL42Q3N0+8+46aa0qXAYG/RdIe5K1wurBm+1wQNA="
