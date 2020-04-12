@@ -11,10 +11,10 @@ jobs:
       services:
         - docker
       install:
-        - npm install semantic-release-docker -D
+        - npm install -g semantic-release-docker
       script:
         - docker build -t christiansiegel/semantic-release-test .
-        - npm run semantic-release
+        - npx semantic-release
 
 stages:
   - test
