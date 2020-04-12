@@ -6,11 +6,10 @@ jobs:
       language: shell
       script: echo dummy test stage
     - stage: semantic release
+      if: branch = master AND type NOT IN (pull_request)
       env:
       # GITHUB_TOKEN
       - secure: "SHmDOuY6/nW8jtdfawTSXTZcrBQEpiaGE+tgyflA6zlZNhHIrqHo+qxRJJyAGRtBTTHAZhLnIFy+cIv/KI7R4be1XitdWcXvhd5ojcfl++o2oOB7waZiGmm67oWeVNnqg4LLhRTYa1A4dnVxkuJps0M8E3zXqrg+gy5a9wumi5fCINaqE+aog6/rRRwe7fBeqa2KFCQEhYiQmNGV0Y4dFea1ilz28Vbm7xlLcAuaKJilz4JeEORTabOmFyVIp6PQxcPhhtvR6A2Pn/GoAzkrK1ptPIeT4oVSGr622Nd1XeKejQdm0uOogDk0xwNi2TL72lYfzhZiESuTBVqdwidjWoJmsXw1CwNHDeH/+/OFjY5MzbuM0TMeMMdrHSkvIigtbh6SzXj97njWug+xgjzG9Z0/EKF4uuDqku4Kwd5v30pJL6psaEvKQfa70WNxz+9URnL1gG44nmt/wniGYzNOb62/c65gEKn89RTfYokY8lKUuQ+Wsu2g2f2fxQcq9ogW7seAjCJH9bfeHicK93huqZaw/4QXdYi81/gPRrkQDjMk8UEFJ09UywJq5L5XYKUOVoyp89xEqeTT8+fB5XRyGa8NB36ah8NKu6ErNbK9D1CgQ0m/RxUtwO0zktpLt3ZABSH28BC41N2JXgOJOLw6Bh2R6DEHWCAS1sGPBF56UT8="
-      if: branch = master
       language: node_js
       node_js: lts/*
-      cache: npm
       script: npx semantic-release
