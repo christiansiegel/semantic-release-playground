@@ -2,13 +2,9 @@ os: linux
 language: shell
 jobs:
   include:
-    - stage: build
+    - stage: test
       language: shell
-      script:
-      - echo "This would be e.g. a docker build"
-      - echo $TRAVIS_BRANCH
-      - echo $TRAVIS_TAG
-      - echo $TRAVIS_PULL_REQUEST
+      script: echo dummy test stage
     - stage: semantic release
       env:
       # GITHUB_TOKEN
