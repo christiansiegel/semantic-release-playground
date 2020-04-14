@@ -5,7 +5,7 @@ plugins:
   - changelogFile: "CHANGELOG.md"
 - - "@google/semantic-release-replace-plugin"
   - replacements:
-      files: [ "setup.py "]
+    - files: [ "setup.py "]
       from: "version=\".*\""
       to: "version=\"${nextRelease.version}\""
       countMatches: true
