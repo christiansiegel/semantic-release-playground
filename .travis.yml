@@ -12,8 +12,14 @@ jobs:
       node_js: lts/*
       services:
         - docker
+      install:
+        - npm install semantic-release
+                      semantic-release-docker
+                      @semantic-release/exec
+                      @semantic-release/changelog
+                      @semantic-release/git
+                      @google/semantic-release-replace-plugin
       script:
-        - npm install semantic-release-docker @semantic-release/exec @semantic-release/changelog @semantic-release/git @google/semantic-release-replace-plugin
         - npx semantic-release
 
 stages:
