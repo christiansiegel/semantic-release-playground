@@ -6,7 +6,10 @@ plugins:
 - "@semantic-release/release-notes-generator"
 - - "@semantic-release/changelog"
   - changelogFile: "CHANGELOG.md"
-    changelogTitle: Changelog
+    changelogTitle: |
+      # Changelog
+
+      This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - - "@google/semantic-release-replace-plugin"
   - replacements:
     - files: [ "setup.py "]
