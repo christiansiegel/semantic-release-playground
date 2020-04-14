@@ -19,6 +19,7 @@ jobs:
                       @semantic-release/changelog
                       @semantic-release/git
                       @google/semantic-release-replace-plugin
+                      conventional-changelog-conventionalcommits
       script:
         - npx semantic-release
 
