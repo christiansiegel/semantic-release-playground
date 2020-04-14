@@ -13,7 +13,7 @@ jobs:
       services:
         - docker
       script:
-        - npm install semantic-release-docker @semantic-release/exec
+        - npm install semantic-release-docker @semantic-release/exec @semantic-release/changelog @semantic-release/git
         - npx semantic-release
 
 stages:
