@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/christiansiegel/semantic-release-playground/compare/v1.6.0...v1.6.1) (2020-04-14)
+
+
+### Bug Fixes
+
+* semantic-release-replace-plugin config ([08c2aae](https://github.com/christiansiegel/semantic-release-playground/commit/08c2aae24ed3fd39f1a962e00af4a5dd9eb68738))
+
 # [1.6.0](https://github.com/christiansiegel/semantic-release-playground/compare/v1.5.0...v1.6.0) (2020-04-14)
 
 
