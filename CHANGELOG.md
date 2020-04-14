@@ -1,5 +1,13 @@
 Changelog
 
+## [2.1.0](https://github.com/christiansiegel/semantic-release-playground/compare/v2.0.0...v2.1.0) (2020-04-14)
+
+
+### Features
+
+* **featy:** feature y ([1d7cb13](https://github.com/christiansiegel/semantic-release-playground/commit/1d7cb13efbef7a4a584719419be5ae190a114881))
+* feature x ([e09557c](https://github.com/christiansiegel/semantic-release-playground/commit/e09557c25d90fa9630cb8d5613085296ccec1f9a))
+
 ## [2.0.0](https://github.com/christiansiegel/semantic-release-playground/compare/v1.6.1...v2.0.0) (2020-04-14)
 
 
