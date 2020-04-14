@@ -22,6 +22,7 @@ jobs:
                       conventional-changelog-conventionalcommits
       script:
         - npx semantic-release
+        - cat CHANGELOG.md
 
 stages:
   - name: build
