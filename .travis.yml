@@ -21,6 +21,9 @@ jobs:
       script: npx semantic-release
     - stage: doc
       language: shell
+      script:
+        # semantic-release will create a new commit onto master with the latest changelog -> download it
+        - curl https://raw.githubusercontent.com/christiansiegel/semantic-release-playground/master/CHANGELOG.md > site/CHANGELOG.md
       deploy:
         provider: pages
         local_dir: site
