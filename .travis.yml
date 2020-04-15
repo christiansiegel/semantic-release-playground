@@ -29,6 +29,7 @@ jobs:
         local_dir: site
         token: $GITHUB_TOKEN
         keep_history: true
+        skip_cleanup: true
 
 stages:
   - name: test
