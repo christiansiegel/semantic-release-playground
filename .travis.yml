@@ -2,16 +2,14 @@ os: linux
 language: shell
 jobs:
   include:
-    - stage: build
+    - stage: test
       language: shell
-      services:
-        - docker
+      services: docker
       script: docker build .
-    - stage: build + release
+    - stage: release
       language: node_js
       node_js: lts/*
-      services:
-        - docker
+      services: docker
       install:
         - npm install semantic-release
                       semantic-release-docker
@@ -20,15 +18,21 @@ jobs:
                       @semantic-release/git
                       @google/semantic-release-replace-plugin
                       conventional-changelog-conventionalcommits
-      script:
-        - npx semantic-release
-        - cat CHANGELOG.md
+      script: npx semantic-release
+    - stage: doc
+      language: shell
+      deploy:
+        provider: pages
+        local_dir: site
+        token: $GITHUB_TOKEN
+        keep_history: true
 
 stages:
-  - name: build
-    if: NOT(branch = master AND type = push AND fork = false)
-  - name: build + release
+  - name: test
+    if: branch = todo # todo: remove this condition
+  - name: release
     if: branch = master AND type = push AND fork = false
+  - name: doc
 
 branches:
   except:
