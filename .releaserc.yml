@@ -25,6 +25,7 @@ plugins:
   - assets:
     - "setup.py"
     - "CHANGELOG.md"
+  - message: "chore(release): ${nextRelease.version} \n\n${nextRelease.notes}"
 - - "@semantic-release/exec":
   - prepareCmd: "docker build -t christiansiegel/semantic-release-test ."
 - - "semantic-release-docker":

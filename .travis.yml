@@ -21,9 +21,7 @@ jobs:
       script: npx semantic-release
     - stage: doc
       language: shell
-      script:
-        # semantic-release will create a new commit onto master with the latest changelog -> download it
-        - curl https://raw.githubusercontent.com/christiansiegel/semantic-release-playground/master/CHANGELOG.md > site/CHANGELOG.md
+      script: cp CHANGELOG.md site/index.html
       deploy:
         provider: pages
         local_dir: site
@@ -32,14 +30,11 @@ jobs:
 
 stages:
   - name: test
-    if: branch = todo # todo: remove this condition
+    if: NOT tag =~ /^v\d+\.\d+\.\d+$/
   - name: release
-    if: branch = master AND type = push AND fork = false
+    if: branch = master AND type = push AND NOT tag =~ /^v\d+\.\d+\.\d+$/
   - name: doc
-
-branches:
-  except:
-    - /^v\d+\.\d+\.\d+$/
+    if: branch = master AND type = push
 
 env:
   global:
