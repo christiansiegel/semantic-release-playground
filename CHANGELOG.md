@@ -3,6 +3,13 @@
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [2.4.0](https://github.com/christiansiegel/semantic-release-playground/compare/v2.3.0...v2.4.0) (2020-04-15)
+
+
+### Features
+
+* skip test&release on release commits ([3811269](https://github.com/christiansiegel/semantic-release-playground/commit/38112693e60465855eaaa21a80dbf0327f1fedd9))
+
 ## [2.3.0](https://github.com/christiansiegel/semantic-release-playground/compare/v2.2.0...v2.3.0) (2020-04-15)
 
 
