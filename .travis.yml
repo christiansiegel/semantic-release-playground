@@ -21,7 +21,9 @@ jobs:
       script: npx semantic-release
     - stage: doc
       language: shell
-      script: cp CHANGELOG.md site/index.html
+      script:
+        - mkdir site
+        - cp CHANGELOG.md site/index.html
       deploy:
         provider: pages
         local_dir: site
