@@ -3,6 +3,13 @@
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+### [2.4.1](https://github.com/christiansiegel/semantic-release-playground/compare/v2.4.0...v2.4.1) (2020-04-15)
+
+
+### Bug Fixes
+
+* stage conditions ([2c66a58](https://github.com/christiansiegel/semantic-release-playground/commit/2c66a58d21c1423181d3b37900ad0e9f797d3104))
+
 ## [2.4.0](https://github.com/christiansiegel/semantic-release-playground/compare/v2.3.0...v2.4.0) (2020-04-15)
 
 
