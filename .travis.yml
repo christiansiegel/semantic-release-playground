@@ -10,7 +10,7 @@ jobs:
       language: shell
       script:
         - mkdir site
-        - cp CHANGELOG.md site/index.html
+        - echo hello world > site/index.html
       deploy:
         provider: pages
         local_dir: site
