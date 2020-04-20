@@ -15,8 +15,8 @@ plugins:
           hasChanged: true
           numMatches: 1
           numReplacements: 1
-- - "@semantic-release/exec":
+- - "@semantic-release/exec"
   - prepareCmd: "docker build -t christiansiegel/semantic-release-test ."
-- - "semantic-release-docker":
+- - "semantic-release-docker"
   - name: "christiansiegel/semantic-release-test"
 - "@semantic-release/github"
