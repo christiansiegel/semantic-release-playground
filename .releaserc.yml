@@ -10,7 +10,7 @@ plugins:
       from: "version=\"dev\""
       to: "version=\"${nextRelease.version}\""
       countMatches: true
-      results: # verify replacement
+      results:
         - file: "setup.py"
           hasChanged: true
           numMatches: 1
