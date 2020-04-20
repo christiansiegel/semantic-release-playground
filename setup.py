@@ -2,6 +2,6 @@ from setuptools import setup
 
 setup(
     name="dummy",
-    version="2.4.0", # automatically updated by semantic-release
+    version="dev",
     setup_requires=["wheel"],
 )

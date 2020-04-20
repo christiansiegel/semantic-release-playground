@@ -4,28 +4,17 @@ tagFormat: "v${version}"
 plugins:
 - "@semantic-release/commit-analyzer"
 - "@semantic-release/release-notes-generator"
-- - "@semantic-release/changelog"
-  - changelogFile: "CHANGELOG.md"
-    changelogTitle: |
-      # Changelog
-
-      This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - - "@google/semantic-release-replace-plugin"
   - replacements:
     - files: [ "setup.py "]
-      from: "version=\".*\""
+      from: "version=\"dev\""
       to: "version=\"${nextRelease.version}\""
       countMatches: true
-      results:
+      results: # verify replacement
         - file: "setup.py"
           hasChanged: true
           numMatches: 1
           numReplacements: 1
-- - "@semantic-release/git"
-  - assets:
-    - "setup.py"
-    - "CHANGELOG.md"
-    message: "chore(release): ${nextRelease.version} \n\n${nextRelease.notes}"
 - - "@semantic-release/exec":
   - prepareCmd: "docker build -t christiansiegel/semantic-release-test ."
 - - "semantic-release-docker":

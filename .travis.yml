@@ -6,19 +6,6 @@ jobs:
       language: shell
       services: docker
       script: docker build .
-    - stage: release
-      language: node_js
-      node_js: lts/*
-      services: docker
-      install:
-        - npm install semantic-release
-                      semantic-release-docker
-                      @semantic-release/exec
-                      @semantic-release/changelog
-                      @semantic-release/git
-                      @google/semantic-release-replace-plugin
-                      conventional-changelog-conventionalcommits
-      script: npx semantic-release
     - stage: doc
       language: shell
       script:
@@ -30,13 +17,24 @@ jobs:
         token: $GITHUB_TOKEN
         keep_history: true
         skip_cleanup: true
+        on:
+          branch: master
+    - stage: release
+      language: node_js
+      node_js: lts/*
+      services: docker
+      install:
+        - npm install semantic-release
+                      semantic-release-docker
+                      @semantic-release/exec
+                      @google/semantic-release-replace-plugin
+                      conventional-changelog-conventionalcommits
+      script: npx semantic-release
 
 stages:
   - name: test
-    if: NOT commit_message =~ /^chore\(release\). \d+\.\d+\.\d/
-  - name: release
-    if: branch = master AND type = push AND commit_message !~ /^chore\(release\). \d+\.\d+\.\d/
   - name: doc
+  - name: release
     if: branch = master AND type = push
 
 branches:
