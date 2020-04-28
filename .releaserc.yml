@@ -19,4 +19,9 @@ plugins:
   - prepareCmd: "docker build -t christiansiegel/semantic-release-test ."
 - - "semantic-release-docker"
   - name: "christiansiegel/semantic-release-test"
+    prodReleaseTags:
+    - <major>.<minor>.<patch>
+    - <major>.<minor>
+    - <major>
+    - latest
 - "@semantic-release/github"

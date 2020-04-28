@@ -32,8 +32,8 @@ jobs:
       script: npx semantic-release
 
 stages:
-  - name: test
-  - name: doc
+  #- name: test
+  #- name: doc
   - name: release
     if: branch = master AND type = push
 
