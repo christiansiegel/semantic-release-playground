@@ -25,15 +25,17 @@ jobs:
       services: docker
       install:
         - npm install semantic-release
-                      git+https://git@github.com/christiansiegel/semantic-release-docker.git
+                      git+https://git@github.com/christiansiegel/semantic-release-docker.git#fix/publish-async-docker
                       @semantic-release/exec
                       @google/semantic-release-replace-plugin
                       conventional-changelog-conventionalcommits
       script: npx semantic-release
 
 stages:
-  #- name: test
-  #- name: doc
+  - name: test
+    if: branch = foo # just to disable for now
+  - name: doc
+    if: branch = foo # just to disable for now
   - name: release
     if: branch = master AND type = push
 
