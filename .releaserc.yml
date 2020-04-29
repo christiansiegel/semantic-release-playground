@@ -19,6 +19,7 @@ plugins:
   - prepareCmd: "docker build -t christiansiegel/semantic-release-test ."
 - - "semantic-release-docker"
   - name: "christiansiegel/semantic-release-test"
+    registryUrl: quay.io # this will fail
     prodReleaseTags:
     - <major>.<minor>.<patch>
     - <major>.<minor>
