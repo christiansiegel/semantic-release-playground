@@ -16,6 +16,6 @@ plugins:
           numMatches: 1
           numReplacements: 1
 - - "@semantic-release/exec"
-  - verifyCmd: "echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin"
-    prepareCmd: "docker build -t christiansiegel/semantic-release-test:latest ."
+  - verifyCmd: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    prepareCmd: docker build -t christiansiegel/semantic-release-test:latest .
 - "@semantic-release/github"
