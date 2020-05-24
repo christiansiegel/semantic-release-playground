@@ -20,9 +20,14 @@ plugins:
       echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     prepareCmd: docker build -t $IMAGE_NAME:latest .
     publishCmd: |
-      echo version: ${nextRelease.version}
-      echo regex: ${/^((\d+)\.\d+)\.\d+$/g.exec(nextRelease.version)}
-      docker tag $IMAGE_NAME:latest $IMAGE_NAME:${nextRelease.version}
+      MAJOR_MINOR_PATCH=${/^((\d+)\.\d+)\.\d+$/g.exec(nextRelease.version)[0]} 
+      MAJOR_MINOR=${/^((\d+)\.\d+)\.\d+$/g.exec(nextRelease.version)[1]}
+      MAJOR=${/^((\d+)\.\d+)\.\d+$/g.exec(nextRelease.version)[2]} 
+      docker tag $IMAGE_NAME:latest $IMAGE_NAME:$MAJOR_MINOR_PATCH
+      docker tag $IMAGE_NAME:latest $IMAGE_NAME:$MAJOR_MINOR
+      docker tag $IMAGE_NAME:latest $IMAGE_NAME:$MAJOR
       docker push $IMAGE_NAME:latest
-      docker push $IMAGE_NAME:${nextRelease.version}
+      docker push $IMAGE_NAME:$MAJOR_MINOR_PATCH
+      docker push $IMAGE_NAME:$MAJOR_MINOR
+      docker push $IMAGE_NAME:$MAJOR
 - "@semantic-release/github"
