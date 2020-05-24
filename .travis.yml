@@ -25,7 +25,6 @@ jobs:
       services: docker
       install:
         - npm install semantic-release
-                      git+https://git@github.com/christiansiegel/semantic-release-docker.git#fix/publish-async-docker
                       @semantic-release/exec
                       @google/semantic-release-replace-plugin
                       conventional-changelog-conventionalcommits

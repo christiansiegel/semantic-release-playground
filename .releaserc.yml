@@ -16,13 +16,6 @@ plugins:
           numMatches: 1
           numReplacements: 1
 - - "@semantic-release/exec"
-  - prepareCmd: "docker build -t christiansiegel/semantic-release-test ."
-- - "semantic-release-docker"
-  - name: "christiansiegel/semantic-release-test"
-    registryUrl: quay.io # this will fail
-    prodReleaseTags:
-    - <major>.<minor>.<patch>
-    - <major>.<minor>
-    - <major>
-    - latest
+  - verifyCmd: "echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin"
+    prepareCmd: "docker build -t christiansiegel/semantic-release-test:latest ."
 - "@semantic-release/github"
