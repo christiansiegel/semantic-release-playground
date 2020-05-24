@@ -18,10 +18,10 @@ plugins:
 - - "@semantic-release/exec"
   - verifyConditionsCmd: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     verifyReleaseCmd: |
-      MAJOR_MINOR_PATCH=${/^((\d+)\.\d+)\.\d+$/g.exec(nextRelease.version)[0]} 
-      MAJOR_MINOR=${      /^((\d+)\.\d+)\.\d+$/g.exec(nextRelease.version)[1]}
-      MAJOR=${            /^((\d+)\.\d+)\.\d+$/g.exec(nextRelease.version)[2]} 
-      [ -z $MAJOR_MINOR_PATCH ] && { echo "Only SemVer versions with version core (major.minor.patch) supported!"; exit 1; }
+      MAJOR_MINOR_PATCH=${/^((\d+)\.\d+)\.\d+$/.exec(nextRelease.version)[0]} 
+      MAJOR_MINOR=${      /^((\d+)\.\d+)\.\d+$/.exec(nextRelease.version)[1]}
+      MAJOR=${            /^((\d+)\.\d+)\.\d+$/.exec(nextRelease.version)[2]} 
+      if [ -z $MAJOR_MINOR_PATCH ]; then echo "Only SemVer versions with version core (major.minor.patch) supported!"; exit 1; fi
     prepareCmd: docker build -t $IMAGE_NAME:latest .
     publishCmd: |
       docker tag $IMAGE_NAME:latest $IMAGE_NAME:$MAJOR_MINOR_PATCH
