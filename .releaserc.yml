@@ -17,11 +17,12 @@ plugins:
           numReplacements: 1
 - - "@semantic-release/exec"
   - verifyConditionsCmd: |
-      echo $IMAGE_NAME
       echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     prepareCmd: docker build -t $IMAGE_NAME:latest .
     publishCmd: |
-      docker push $IMAGE_NAME:latest
+      echo version: ${nextRelease.version}
+      echo regex: ${/^((\d+)\.\d+)\.\d+$/g.exec(nextRelease.version)}
       docker tag $IMAGE_NAME:latest $IMAGE_NAME:${nextRelease.version}
+      docker push $IMAGE_NAME:latest
       docker push $IMAGE_NAME:${nextRelease.version}
 - "@semantic-release/github"
